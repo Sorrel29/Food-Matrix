@@ -22,7 +22,6 @@ class FocalRecipe extends React.Component {
     console.log('sending phone number');
     //console.log(props.recipeList);
     //POST request to send number
-    //where should we parse the phone number?
     //{number: ''}
     var component = this;
       $.ajax({
