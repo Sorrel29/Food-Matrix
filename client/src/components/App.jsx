@@ -7,8 +7,6 @@ import SearchRecipe from './SearchRecipe.jsx';
 import FocalRecipe from './FocalRecipe.jsx';
 import RecipeEntry from './RecipeEntry.jsx';
 import SearchUser from './SearchUser.jsx';
-//import recipeObj from '../../../database-mongo/RecipeListData.js';
-
 
 class App extends React.Component {
   constructor(props) {
@@ -18,9 +16,15 @@ class App extends React.Component {
       recipeList: recipeObj.fakeRecipes, 
       favoriteList: favoriteRecipes.fakeRecipes, 
       focalRecipe: sampleRecipe, 
+      userSearch: '',
+      recipeSearch: ''
     };
     this.onRecipeClick = this.onRecipeClick.bind(this);
     this.addFavorite = this.addFavorite.bind(this);
+    this.onUserSearchClick = this.onUserSearchClick.bind(this);
+    this.onUserSearch = this.onUserSearch.bind(this);
+    this.onRecipeSearch = this.onRecipeSearch.bind(this);
+    this.onRecipeSearchClick = this.onRecipeSearchClick.bind(this);
   }
 
   // componentDidMount() {
@@ -46,15 +50,69 @@ class App extends React.Component {
     });
   }
 
+  //get request for list of favorites
+  //modify the existing favorites list
+  onUserSearchClick() {
+    console.log(this.state.userSearch + ' was searched');
+    this.setState({
+      currentUser : this.state.userSearch
+    })
+    //check if user is in database
+    //on success:
+    // this.setState({
+    //   this.currentUser = this.state.userSearch
+    //   this.favoritesList = res.favoriteList
+    // })
+  }
+
+  onUserSearch(e) {
+    this.setState({
+      userSearch: e.target.value
+    });
+    console.log(this.state.userSearch);
+  }
+
+  onRecipeSearch(e) {
+    this.setState({
+      recipeSearch: e.target.value
+    });
+    console.log(this.state.recipeSearch);
+  }
+
+  //add get request for new recipes from server
+  onRecipeSearchClick() {
+    console.log(this.state.recipeSearch + ' was searched');
+  }
+
+
+  //post request to store favorite in database with current user
+  //need to account for case where there isn't a currentUser
   addFavorite (recipe) {
     console.log('added to favorites');
-    //post request to server
-    //data: {user: '', recipe: ID}
+  //   $.ajax({
+  //     method: 'POST',
+  //     url: '/', 
+  //     data: {
+  //       username: this.state.currentUser,
+  //       recipe: this.state.focalRecipe
+  //     }
+  //     success: (res) => {
+  //       console.log('success')
+  //     },
+  //     error: (err) => {
+  //       console.log('get request failed');
+  //     }
+  //   });
+  // }
   }
 
   render() {
     return (
       <div>
+
+      <div>
+      Current user: {this.state.currentUser}
+      </div>
 
       <FocalRecipe
       focalRecipe = {this.state.focalRecipe}
@@ -62,9 +120,17 @@ class App extends React.Component {
       addFavorite = {this.addFavorite}
       />
 
-      <SearchRecipe/>
+      <SearchRecipe
+      onRecipeSearch = {this.onRecipeSearch}
+      onRecipeSearchClick = {this.onRecipeSearchClick}
+      recipeSearch = {this.state.recipeSearch}
+      />
 
-      <SearchUser/>
+      <SearchUser
+      onUserSearchClick = {this.onUserSearchClick}
+      userSearch = {this.state.userSearch}
+      onUserSearch = {this.onUserSearch}
+      />
 
       <FavoritesList
       favoriteList = {this.state.favoriteList}
@@ -72,7 +138,7 @@ class App extends React.Component {
 
       <AllRecipesList
       onRecipeClick = {this.onRecipeClick}
-      recipeList = {this.state.recipeList}
+      recipeList= {this.state.recipeList}
       />
 
       <RecipeEntry/>

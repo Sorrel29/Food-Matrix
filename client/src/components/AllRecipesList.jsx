@@ -17,14 +17,3 @@ var AllRecipesList = (props) => {
 }
 
 export default AllRecipesList;
-
-
-
-
-  
-// {props.recipeList.map((recipe) =>
-//         <ul>
-//           <div>{recipe.title} </div>
-//           <div> <img src={recipe.image}alt="" /> </div>
-//         </ul>   
-//       )}
