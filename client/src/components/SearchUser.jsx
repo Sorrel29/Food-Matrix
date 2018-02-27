@@ -1,6 +1,5 @@
 import React from 'react';
 
-//comment
 var SearchUser = (props) => {
   return (
     <div>
