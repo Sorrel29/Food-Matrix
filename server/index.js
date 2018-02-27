@@ -4,9 +4,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const recipe = require('../database-mongo/RecipeIDData.js');
 const recipeList = require('../database-mongo/RecipeListData.js');
-const twilioHelpers = require('../helpers/twilioHelpers.js')
-const spoonacularHelpers = require('../helpers/spoonacularHelpers.js')
-const db = require('../database-mongo/index.js')
+const twilioHelpers = require('../helpers/twilioHelpers.js');
+const spoonacularHelpers = require('../helpers/spoonacularHelpers.js');
+const db = require('../database-mongo/index.js');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/../client/dist'));
@@ -63,3 +63,5 @@ app.post('/sendText', bodyParser.json(), (req, res) => {
 
 
 app.listen(process.env.PORT || 3000, () => console.log('Food-Matrix listening on port 3000!'))
+
+module.exports = app;
