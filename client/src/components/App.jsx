@@ -35,6 +35,7 @@ class App extends React.Component {
 
   //When recipe in either favorites or all recipes list is clicked, make API request for more detailed data object for target recipe and load into focal recipe component
   onRecipeClick (recipe) {
+    debugger;
     var component = this;
     $.ajax({
       type: 'GET',
@@ -42,7 +43,6 @@ class App extends React.Component {
       success: function(recipe) {
         component.setState({
           focalRecipe: recipe
-
         });
       },
       error: function(err) {

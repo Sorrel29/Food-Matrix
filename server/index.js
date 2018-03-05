@@ -48,6 +48,7 @@ app.get('/recipes', (req, res) => {
 app.get('/recipe/:id', (req, res) => {
   //localhost:3000/recipe/615374
   var recipeID = req.params.id;
+  debugger;
   spoonacularHelpers.getIngredients(recipeID)
     .then(data => res.send(data));
 });
