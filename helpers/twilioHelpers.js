@@ -4,6 +4,7 @@ const client = require('twilio')(
   process.env.TWILIO_AUTH_TOKEN
 );
 
+//Twillio API request that sends a text to a given phoneNumber with specific ingredients
 var sendMessage = function(phoneNumber, ingredients) {
   return new Promise(function(resolve, reject) {
     client.messages.create({
