@@ -47,6 +47,7 @@ class FocalRecipe extends React.Component {
     })
   }
 
+
   //send text message to user-inputted phone number, containing ingredients from recipe data loaded into the focal recipe component
   sendNumber() {
     var phoneNumber = '1' + this.state.areaCode + this.state.prefix + this.state.lineNum;
@@ -92,7 +93,9 @@ class FocalRecipe extends React.Component {
           <h3>{this.props.focalRecipe.title}</h3>
           <div>
             <a href={this.props.focalRecipe.sourceUrl} target="_blank">
-              <img class="ui centered rounded image" src={this.props.focalRecipe.image}/>
+              <img
+                class="ui centered rounded image" src={this.props.focalRecipe.image}
+              />
             </a>
           </div>
         </div>
