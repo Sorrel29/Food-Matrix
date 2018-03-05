@@ -42,7 +42,6 @@ class App extends React.Component {
       success: function(recipe) {
         component.setState({
           focalRecipe: recipe
-
         });
       },
       error: function(err) {
@@ -139,7 +138,20 @@ class App extends React.Component {
           //component.onUserSearchClick();
           component.setState({
             favoriteSuccess: true
-          })
+          });
+          $.ajax({
+            type: 'GET',
+            url: '/db/fetch',
+            data: 'username=' + component.state.userSearch,
+            success: function(favRecipesData) {
+              component.setState({
+                favoriteList: favRecipesData,
+              });
+            },
+            error: function(err) {
+              console.log(err);
+            }
+          });
         },
         error: (err) => {
           console.log(err);
