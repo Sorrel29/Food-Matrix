@@ -5,9 +5,7 @@ mongoose.connect(process.env.MONGO);
 
 const db = mongoose.connection;
 
-
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
 
 let userFavoriteSchema = mongoose.Schema({
   username: String,
@@ -45,8 +43,9 @@ let retrieve = (username) => {
 //Auto-generates a "now date"
 let save = (documentObj) => {
   // using this code block to check if recipe is already duplicated in database
-  // for user (we could have used _id to prevent duplicates, but because a user can have multiple recipes and a recipe can have multiple users, we saw no easy property of the schema to set as the _id... refer to Mongoose docs if unsure about why _id prevents duplicates)
+  // for user (we could have used _id to prevent duplicates, but because a user can have multiple recipes and a recipe can have multiple users, we saw no easy property of the schema to set as the _id... refer to Mongoose docs if unsure about why setting a _id property prevents duplicates)
   var duplicate = false;
+  //return the output of the below function, which will be a promise
   return retrieve(documentObj.username).then(data => {
     for (var i = 0; i < data.length; i++) {
       if (data[i].title === documentObj.title) {
@@ -55,9 +54,9 @@ let save = (documentObj) => {
       }
     }
   }).then(data => {
+    //if this is not a duplicate recipe, save to database
     if (!duplicate) {
       return new Promise(function(resolve, reject) {
-        //if recipe is a duplicate, throw error instead of saving to database
         let document = new UserFavorite({
           username: documentObj.username,
           id: documentObj.id,
@@ -71,9 +70,10 @@ let save = (documentObj) => {
           resolve(favorite);
         });
       });
+    //else return (empty?) promise
     } else {
       return new Promise(function(resolve, reject) {
-        resolve();
+        resolve("Duplicate entry");
       });
     }
   });
