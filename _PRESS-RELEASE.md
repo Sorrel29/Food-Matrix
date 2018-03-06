@@ -1,27 +1,26 @@
-Project Name
 Heading
-Name the product in a way the reader (i.e. your target customers) will understand.
+Food-Matrix
 
 Sub-Heading
-Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+Take charge of your kitchen!
 
 Summary
-Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+An app that will search recipes by ingredient for you, allow you to save your favorites, and text you (or your friend) the rest of the ingredients you need to make it!
 
 Problem
-Describe the problem your product solves.
+Users have ingredients in their pantry but don't know what recipes they can make with them. They need to write shopping lists for said recipes but can't find a pen.
 
 Solution
-Describe how your product elegantly solves the problem.
+Find a way to use the ingredients in the users pantry and texts them a list of ingredients to buy at the store to solve the need for creating shopping lists.
 
 Quote from You
-A quote from a spokesperson in your company.
+"Bye-bye hellofresh!"
 
 How to Get Started
-Describe how easy it is to get started.
+Just head to the website and start recipes by ingredients! Enter a username to save ingredients for later! Text yourself the ingredients from your favorite recipe!
 
 Customer Quote
-Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+"I couldn't believe that I could find recipes by using just the ingredients I had in my pantry, and how I could save so much time by texting myself the rest of the ingredients!"
 
 Closing and Call to Action
-Wrap it up and give pointers where the reader should go next.
+So, just head on over to Food-Matrix to start saving time and money!
