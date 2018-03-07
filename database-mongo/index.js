@@ -19,6 +19,8 @@ let userFavoriteSchema = mongoose.Schema({
   likes: Number
 });
 
+//fancy stuff
+
 let UserFavorite = mongoose.model('UserFavorite', userFavoriteSchema);
 
 
