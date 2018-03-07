@@ -5,9 +5,7 @@ mongoose.connect(process.env.MONGO);
 
 const db = mongoose.connection;
 
-
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
 
 let userFavoriteSchema = mongoose.Schema({
   username: String,
@@ -22,26 +20,6 @@ let userFavoriteSchema = mongoose.Schema({
 });
 
 let UserFavorite = mongoose.model('UserFavorite', userFavoriteSchema);
-
-
-//Saving only relevant information from recipe object passed from front-end (see schema)
-//Auto-generates a "now date"
-let save = (documentObj) => {
-  return new Promise(function(resolve, reject) {
-    let document = new UserFavorite({
-      username: documentObj.username,
-      id: documentObj.id,
-      title: documentObj.title,
-      image: documentObj.image,
-      likes: documentObj.likes,
-      extendedIngredients: documentObj.extendedIngredients
-    });
-    document.save(function(err, favorite) {
-      if (err) reject(err);
-      resolve(favorite)
-    });
-  });
-};
 
 
 //Returning list of a user's favorites, sorted descending by popularity('likes')
@@ -61,6 +39,45 @@ let retrieve = (username) => {
   });
 };
 
+//Saving only relevant information from recipe object passed from front-end (see schema)
+//Auto-generates a "now date"
+let save = (documentObj) => {
+  // using this code block to check if recipe is already duplicated in database
+  // for user (we could have used _id to prevent duplicates, but because a user can have multiple recipes and a recipe can have multiple users, we saw no easy property of the schema to set as the _id... refer to Mongoose docs if unsure about why setting a _id property prevents duplicates)
+  var duplicate = false;
+  //return the output of the below function, which will be a promise
+  return retrieve(documentObj.username).then(data => {
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].title === documentObj.title) {
+        duplicate = true;
+        break;
+      }
+    }
+  }).then(data => {
+    //if this is not a duplicate recipe, save to database
+    if (!duplicate) {
+      return new Promise(function(resolve, reject) {
+        let document = new UserFavorite({
+          username: documentObj.username,
+          id: documentObj.id,
+          title: documentObj.title,
+          image: documentObj.image,
+          likes: documentObj.likes,
+          extendedIngredients: documentObj.extendedIngredients
+        });
+        document.save(function(err, favorite) {
+          if (err) reject(err);
+          resolve(favorite);
+        });
+      });
+    //else return (empty?) promise
+    } else {
+      return new Promise(function(resolve, reject) {
+        resolve("Duplicate entry");
+      });
+    }
+  });
+};
 
 module.exports = {
   save : save,

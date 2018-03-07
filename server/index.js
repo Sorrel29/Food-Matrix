@@ -22,7 +22,6 @@ app.use(express.static(__dirname + '/../client/dist'));
 // }
 app.post('/db/save', (req, res) => {
   var documentObj = req.body;
-  console.log(documentObj);
   db.save(documentObj)
     .then(response => res.send('saved to db'));
 });
