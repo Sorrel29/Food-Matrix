@@ -20,7 +20,7 @@
 
 ## Getting Started
 
-- App deployed on Heroku at https://quiet-ravine-37270.herokuapp.com/
+- App deployed on Heroku at https://foodmatrix.herokuapp.com/
 
 - Spoonacular API
   -Register for a [Spoonacular API key](https://rapidapi.com/user/spoonacular/package/Recipe%20-%20Food%20-%20Nutrition/pricing)
